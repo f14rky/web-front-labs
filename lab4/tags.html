@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Чвалинский Дмитрий Олегович. Лабораторная 4</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../favicon-16x16.png">
+        <link rel="shortcut icon" href="../favicon-32x32.png">
+        <style>
+            body {
+             margin: 0;
+             overflow: hidden;
+           }
+       
+           header {
+             position: absolute;
+             top: 0;
+             width: 100%;
+             z-index: 100
+           }
+       
+           .tag-cloud {
+             position: relative;
+             height: calc(100vh - 80px);
+           }
+       
+           .tag-o {
+             position: absolute;
+             transform-origin: center;
+           }
+       
+           .tag {
+             display: inline-block;
+             transition: transform 0.3s ease, text-shadow 0.3s ease, z-index 0.3s ease;
+           }
+       
+           .tag:hover {
+             transform: scale(1.5);
+             z-index: 1000;
+             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+           }
+        </style>
+    </head>
+
+    <body>
+        <header>НГТУ, ФБ, Лабораторная работа 4
+            <hr>
+        </header>
+
+        <main>
+            <div class="tag-cloud">
+                <span class="tag-o" style="top: 10%; left: 20%; transform: rotate(-19deg);">
+                  <span class="tag" style="color: rgb(208, 255, 0); font-size: 55px;">HTML</span>
+                </span>
+                <span class="tag-o" style="top: 14%; left: 45%; transform: rotate(15deg);">
+                  <span class="tag" style="color: blue; font-size: 60px;">CSS</span>
+                </span>
+                <span class="tag-o" style="top: 17%; left: 30%; transform: rotate(-10deg);">
+                  <span class="tag" style="color: rgb(219, 255, 208); font-size: 42px;">JavaScript</span>
+                </span>
+                <span class="tag-o" style="top: 25%; left: 50%; transform: rotate(10deg);">
+                  <span class="tag" style="color: rgb(255, 0, 119); font-size: 52px;">DOM</span>
+                </span>
+                <span class="tag-o" style="top: 32%; left: 33%; transform: rotate(12deg);">
+                  <span class="tag" style="color: rgb(38, 0, 128); font-size: 72px;">API</span>
+                </span>
+                <span class="tag-o" style="top: 38%; left: 65%; transform: rotate(0deg);">
+                  <span class="tag" style="color: rgb(0, 0, 0); font-size: 45px;">ResponsiveDesign</span>
+                </span>
+                <span class="tag-o" style="top: 44%; left: 30%; transform: rotate(7deg);">
+                  <span class="tag" style="color: rgb(255, 208, 208); font-size: 50px;">Frontend</span>
+                </span>
+                <span class="tag-o" style="top: 50%; left: 25%; transform: rotate(-19deg);">
+                  <span class="tag" style="color: rgb(1, 46, 3); font-size: 60px;">Backend</span>
+                </span>
+                <span class="tag-o" style="top: 54%; left: 55%; transform: rotate(10deg);">
+                  <span class="tag" style="color: rgb(255, 217, 0); font-size: 35px;">Framework</span>
+                </span>
+                <span class="tag-o" style="top: 60%; left: 80%; transform: rotate(14deg);">
+                  <span class="tag" style="color: rgb(129, 255, 255); font-size: 42px;">Database</span>
+                </span>
+                <span class="tag-o" style="top: 65%; left: 25%; transform: rotate(-11deg);">
+                  <span class="tag" style="color: rgb(73, 7, 57); font-size: 52px;">HTTP</span>
+                </span>
+                <span class="tag-o" style="top: 70%; left: 50%; transform: rotate(-6deg);">
+                  <span class="tag" style="color: rgb(215, 144, 248); font-size: 70px;">LocalStorage</span>
+                </span>
+                <span class="tag-o" style="top: 75%; left: 60%; transform: rotate(12deg);">
+                  <span class="tag" style="color: rgb(255, 136, 0); font-size: 65px;">SEO</span>
+                </span>
+                <span class="tag-o" style="top: 80%; left: 10%; transform: rotate(5deg);">
+                  <span class="tag" style="color: rgb(255, 15, 15); font-size: 55px;">GitHub</span>
+                </span>
+                <span class="tag-o" style="top: 85%; left: 40%; transform: rotate(7deg);">
+                  <span class="tag" style="color: rgb(0, 158, 158); font-size: 45px;">Deployment</span>
+                </span>
+        </main>
+
+        <footer>
+            <hr>
+            &copy; Дмитрий Чвалинский, ФБИ-34, 2 курс, 2025
+        </footer>
+    </body>
+</html>
