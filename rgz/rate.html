@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Курс валют — Калькулятор CAD/RUB</title>
+    <link rel="icon" href="https://ztd-euwest2-prod-s3.s3.eu-west-2.amazonaws.com/Rosseti_logo_dd29315e0d.png" type="image/png" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            color: #005b9c;
+            padding: 10px 20px;
+            border-bottom: 4px solid #005b9c;
+            position: relative;
+        }
+        .logo-container {
+            position: absolute;
+            left: 20px;
+        }
+        header img {
+            height: 60px;
+        }
+        .header-center {
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #005b9c;
+        }
+        h1, h2 {
+            color: #005b9c;
+            text-align: center;
+        }
+        #menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #f0f0f0;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            padding-top: 30px;
+            z-index: 10;
+        }
+        #menu nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #menu nav ul li {
+            text-align: center;
+            margin: 10px 0;
+        }
+        #menu nav ul li a {
+            text-decoration: none;
+            color: #555;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        #menu nav ul li a:hover,
+        #menu nav ul li a.active {
+            background-color: #005b9c;
+            color: white;
+        }
+        .calculator {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type=number] {
+            width: 100%;
+            font-size: 1.2em;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #005b9c;
+            border: none;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #004a82;
+        }
+        .rate-info {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            color: #005b9c;
+        }
+        #chart-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        #chart-info {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 1em;
+            color: #005b9c;
+            font-weight: bold;
+        }
+        .date-range {
+            max-width: 600px;
+            margin: 10px auto 0;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .date-range label {
+            margin-top: 0;
+        }
+        .date-range input[type=date] {
+            padding: 5px 8px;
+            font-size: 1em;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<header>
+    <div class="logo-container">
+        <img src="https://rosseti-yug.ru/bitrix/templates/index/i/rosseti_ug_logo.png" alt="Логотип" />
+    </div>
+    <div class="header-center">
+        <h1>Курс валют: Калькулятор CAD / RUB</h1>
+    </div>
+</header>
+
+<div id="menu">
+  <nav>
+    <ul>
+        <li><a href="aboutus.html">О компании</a></li>
+        <li><a href="news.html"> Новости</a></li>
+        <li><a href="rate.html" class="active">Курс валют</a></li>
+        <li><a href="contact.html">Контакты</a></li>
+        <li><a href="video.html">Видео</a></li>
+    </ul>
+  </nav>
+</div>
+
+<body>
+
+    <div class="calculator">
+        <div class="rate-info" id="rate-info">Загрузка курса...</div>
+        <label for="rub">Рубли (RUB):</label>
+        <input type="number" id="rub" min="0" step="0.01" placeholder="Введите сумму в рублях" />
+        <label for="cad">Канадские доллары (CAD):</label>
+        <input type="number" id="cad" min="0" step="0.0001" placeholder="Введите сумму в CAD" />
+        <button id="convert-rub-to-cad">Перевести RUB → CAD</button>
+        <button id="convert-cad-to-rub">Перевести CAD → RUB</button>
+    </div>
+
+    <div class="date-range">
+        <label for="start-date">Период с: <input type="date" id="start-date" /></label>
+        <label for="end-date">по: <input type="date" id="end-date" /></label>
+        <button id="load-chart">Показать график</button>
+    </div>
+
+    <div id="chart-container">
+        <canvas id="rate-chart" height="400"></canvas>
+        <div id="chart-info">Кликните на столбец, чтобы увидеть дату и курс</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let currentRate = null;
+        const rateInfoEl = document.getElementById('rate-info');
+        const rubInput = document.getElementById('rub');
+        const cadInput = document.getElementById('cad');
+        const btnRubToCad = document.getElementById('convert-rub-to-cad');
+        const btnCadToRub = document.getElementById('convert-cad-to-rub');
+        const startDateInput = document.getElementById('start-date');
+        const endDateInput = document.getElementById('end-date');
+        const btnLoadChart = document.getElementById('load-chart');
+        const chartInfoEl = document.getElementById('chart-info');
+
+        let chart = null;
+        let selectedBarIndex = null;
+
+        async function fetchTodayRate() {
+            try {
+                const response = await fetch('https://www.cbr-xml-daily.ru/daily.xml');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, "application/xml");
+
+                const dateStr = xml.querySelector('ValCurs').getAttribute('Date');
+                const valutes = xml.querySelectorAll('Valute');
+                let rate = null;
+                let nominal = 1;
+
+                valutes.forEach(valute => {
+                    const charCode = valute.querySelector('CharCode').textContent;
+                    if (charCode === 'CAD') {
+                        rate = parseFloat(valute.querySelector('Value').textContent.replace(',', '.'));
+                        nominal = parseInt(valute.querySelector('Nominal').textContent);
+                    }
+                });
+
+                if (rate) {
+                    currentRate = rate / nominal;
+                    rateInfoEl.textContent = `Курс на ${dateStr}: 1 CAD = ${currentRate.toFixed(4)} RUB`;
+                } else {
+                    rateInfoEl.textContent = 'Курс CAD не найден в данных Центробанка.';
+                }
+            } catch (error) {
+                rateInfoEl.textContent = 'Ошибка загрузки курса валют.';
+                console.error(error);
+            }
+        }
+
+        btnRubToCad.onclick = () => {
+            if (!currentRate) return alert('Курс валют не загружен.');
+            const rub = parseFloat(rubInput.value);
+            if (isNaN(rub)) return alert('Введите корректное значение рублей.');
+            const cad = rub / currentRate;
+            cadInput.value = cad.toFixed(4);
+        };
+
+        btnCadToRub.onclick = () => {
+            if (!currentRate) return alert('Курс валют не загружен.');
+            const cad = parseFloat(cadInput.value);
+            if (isNaN(cad)) return alert('Введите корректное значение канадских долларов.');
+            const rub = cad * currentRate;
+            rubInput.value = rub.toFixed(2);
+        };
+
+        function formatDateToISO(date) {
+            const d = new Date(date);
+            return d.toISOString().slice(0,10);
+        }
+
+        function setDefaultDateRange() {
+            const today = new Date();
+            const monthAgo = new Date(today);
+            monthAgo.setMonth(today.getMonth() - 1);
+            startDateInput.value = formatDateToISO(monthAgo);
+            endDateInput.value = formatDateToISO(today);
+        }
+
+        async function fetchHistoricalRates(startDate, endDate) {
+            const formatForAPI = (dateStr) => {
+                const [yyyy, mm, dd] = dateStr.split('-');
+                return `${dd}/${mm}/${yyyy}`;
+            };
+
+            const url = `https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=${formatForAPI(startDate)}&date_req2=${formatForAPI(endDate)}&VAL_NM_RQ=R01235`;
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, "application/xml");
+
+                const records = [...xml.querySelectorAll('Record')];
+                records.sort((a,b) => {
+                    const d1 = a.getAttribute('Date');
+                    const d2 = b.getAttribute('Date');
+                    return new Date(d1.split('.').reverse().join('-')) - new Date(d2.split('.').reverse().join('-'));
+                });
+
+                const dates = [];
+                const rates = [];
+
+                records.forEach(rec => {
+                    const dateStr = rec.getAttribute('Date');
+                    const rateStr = rec.querySelector('Value').textContent.replace(',', '.');
+                    const dateISO = dateStr.split('.').reverse().join('-');
+                    dates.push(dateISO);
+                    rates.push(parseFloat(rateStr));
+                });
+
+                return {dates, rates};
+            } catch (error) {
+                alert('Ошибка загрузки исторических данных.');
+                console.error(error);
+                return null;
+            }
+        }
+
+        function renderChart(labels, data) {
+            if (chart) {
+                chart.destroy();
+                selectedBarIndex = null;
+                chartInfoEl.textContent = "Кликните на столбец, чтобы увидеть дату и курс";
+            }
+
+            const ctx = document.getElementById('rate-chart').getContext('2d');
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Курс CAD к RUB',
+                        data: data,
+                        backgroundColor: 'rgba(0, 91, 156, 0.7)',
+                        borderColor: 'rgba(0, 91, 156, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 90,
+                                minRotation: 45,
+                                autoSkip: true,
+                                maxTicksLimit: 15
+                            }
+                        },
+                        y: {
+                            beginAtZero: false
+                        }
+                    },
+                    onClick: (evt) => {
+                        const points = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+                        if (points.length) {
+                            const idx = points[0].index;
+                            selectedBarIndex = idx;
+                            const date = labels[idx];
+                            const rate = data[idx];
+                            chartInfoEl.textContent = `Дата: ${date}, Курс: ${rate.toFixed(4)} RUB за 1 CAD`;
+                            highlightBar(idx);
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
+                    }
+                }
+            });
+        }
+
+        function highlightBar(index) {
+            if (!chart) return;
+
+            const colors = chart.data.datasets[0].backgroundColor;
+            if (Array.isArray(colors)) {
+                for(let i=0; i < colors.length; i++) {
+                    colors[i] = 'rgba(0, 91, 156, 0.7)';
+                }
+                colors[index] = 'rgba(255, 99, 132, 0.9)';
+            } else {
+                const newColors = chart.data.labels.map(() => 'rgba(0, 91, 156, 0.7)');
+                newColors[index] = 'rgba(255, 99, 132, 0.9)';
+                chart.data.datasets[0].backgroundColor = newColors;
+            }
+            chart.update();
+        }
+
+        btnLoadChart.onclick = async () => {
+            if (!startDateInput.value || !endDateInput.value) {
+                alert('Выберите даты начала и конца периода.');
+                return;
+            }
+            if (startDateInput.value > endDateInput.value) {
+                alert('Дата начала не может быть позже даты конца.');
+                return;
+            }
+
+            const diffDays = (new Date(endDateInput.value) - new Date(startDateInput.value)) / (1000*3600*24);
+            if (diffDays < 29) {
+                alert('Пожалуйста, выберите период не менее 30 дней.');
+                return;
+            }
+
+            const data = await fetchHistoricalRates(startDateInput.value, endDateInput.value);
+            if (data) {
+                renderChart(data.dates, data.rates);
+            }
+        };
+
+        async function init() {
+            await fetchTodayRate();
+            setDefaultDateRange();
+        }
+
+        init();
+    </script>
+</body>
+</html>
