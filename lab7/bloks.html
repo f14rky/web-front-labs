@@ -16,14 +16,24 @@
         </header>
 
         <main>
-            <ul>
-                <li><a href="bloks.html">Добавление блоков</a></li>
-            </ul>
+            <button onclick="addNewBlock()">Добавить блок</button>
         </main>
 
         <footer>
             <hr>
             &copy; Дмитрий Чвалинский, ФБИ-34, 2 курс, 2025
         </footer>
+
+        <script>
+        function addNewBlock() {
+            let newBlock = document.createElement('div');
+            newBlock.style.border = '1px solid black';
+            newBlock.style.margin = '10px';
+            newBlock.style.padding = '10px';
+            newBlock.style.height = '40px';
+            newBlock.style.backgroundColor = 'green';
+            document.querySelector('main').appendChild(newBlock);
+        }
+        </script>
     </body>
 </html>
