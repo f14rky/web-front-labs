@@ -8,6 +8,11 @@
         <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="../favicon-16x16.png">
         <link rel="shortcut icon" href="../favicon-32x32.png">
+        <style>
+        .message{
+        cursor: pointer;
+        }
+        </style>
     </head>
 
     <body>
@@ -16,14 +21,23 @@
         </header>
 
         <main>
-            <ul>
-                <li><a href="arithmetic.html">arithmetic.html</a></li>
-            </ul>
+            <div class="message" onclick="showSum()">Сколько будет 5154+7891?</div>
+            <div class="message">Узнать, кто автор страницы</div>
         </main>
 
         <footer>
             <hr>
             &copy; Дмитрий Чвалинский, ФБИ-34, 2 курс, 2025
         </footer>
+
+        <script>
+            function showSum() {
+                let a = 5154
+                let b = 7891
+                let result = a + b
+                alert('Сумма ' + a + ' и ' + b + ' равна ' + result); 
+        }
+        </script>
+
     </body>
 </html>
