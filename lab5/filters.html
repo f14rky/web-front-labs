@@ -39,6 +39,12 @@
             <span id="brightnessOutput"></span>
             </div>
             <div><img src="123.jpg" id="brightnessImage"></div>
+            <div>
+            contrast:
+            <input type="range" value="100" min="0" max="500" step="1" onchange="contrastChange()" id="contrastValue">
+            <span id="contrastOutput"></span>
+            </div>
+            <div><img src="123.jpg" id="contrastImage"></div>
         </main>
 
         <footer>
@@ -60,6 +66,11 @@
              let value = document.getElementById('brightnessValue').value + '%';
              document.getElementById('brightnessOutput').innerText = value;
              document.getElementById('brightnessImage').style.filter = 'brightness(' + value +')';
+         }
+         function contrastChange(){
+             let value = document.getElementById('contrastValue').value + '%';
+             document.getElementById('contrastOutput').innerText = value;
+             document.getElementById('contrastImage').style.filter = 'contrast(' + value +')';
          }
         </script>
     </body>
