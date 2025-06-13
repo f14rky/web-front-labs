@@ -8,22 +8,40 @@
         <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="../favicon-16x16.png">
         <link rel="shortcut icon" href="../favicon-32x32.png">
+        
+        <style>
+        #mtable {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        </style>
     </head>
 
-    <body>
+    <body onload="showMutipleTable()">
         <header>НГТУ, ФБ, Лабораторная работа 6
             <hr>
         </header>
 
         <main>
-            <ul>
-                <li><a href="mtable.html">mtable.html</a></li>
-            </ul>
+            <div id="mtable"></div>
         </main>
 
         <footer>
             <hr>
             &copy; Дмитрий Чвалинский, ФБИ-34, 2 курс, 2025
         </footer>
+
+        <script>
+            function showMutipleTable() {
+            let tbl = document.getElementById('mtable');
+            tbl.innerHTML = '<h1>Таблица умножения</h1>'
+            for(i = 1; i <= 10; i++) {
+                let s = `<div>${i} * 7 = ${i*7}</div>`;
+                tbl.innerHTML += s;
+            }
+        }
+        </script>
+
     </body>
 </html>
