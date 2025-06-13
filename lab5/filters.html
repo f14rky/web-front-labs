@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Чвалинский Дмитрий Олегович. Лабораторная 5</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../favicon-16x16.png">
+        <link rel="shortcut icon" href="../favicon-32x32.png">
+        <style>
+            header {
+            cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header onclick="showAuthor()">
+            НГТУ, ФБ, Лабораторная работа 5
+            <hr>
+        </header>
+
+        <main>
+            <div>
+            Фильтр Blur:
+            <input type="range"  value="0" min="0" max="20" onchange="blurChange()" id="blurValue">
+            <span id="blurOutput"></span>
+            </div>
+            <div><img src="123.jpg" id="blurImage"></div>
+        </main>
+
+        <footer>
+            <hr>
+            &copy; Дмитрий Чвалинский, ФБИ-34, 2 курс, 2025
+        </footer>
+
+        <script>
+        function showAuthor() {
+            let author = 'Автор страницы:\nЧвалинский Дмитрий';
+            alert(author);
+        }
+        function blurChange() {
+             let value = document.getElementById('blurValue').value + 'px';
+             document.getElementById('blurOutput').innerText = value;
+             document.getElementById('blurImage').style.filter = 'blur(' + value +')';
+        }
+        </script>
+    </body>
+</html>
