@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Чвалинский Дмитрий Олегович. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../favicon-16x16.png">
+        <link rel="shortcut icon" href="../favicon-32x32.png">
+        <style>
+            header {
+                cursor: pointer;
+            }
+            footer {
+                cursor: pointer;
+            }
+            .book {
+                border: 1px solid #686868;
+                background-color: #ffffff;
+                border-radius: 10px;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .bestseller {
+                background-color: #fff6a8;
+                font-weight: bold;
+            }
+            .out-of-stock {
+                opacity: 1;
+                font-style: italic;
+            }
+        </style>
+    </head>
+
+    <body onload="showBooks()">
+        <header>НГТУ, ФБ, Лабораторная работа 6
+            <hr>
+        </header>
+
+        <main>
+            <h1>Список книг</h1>
+            <div id="bookList"></div>
+        </main>
+
+        <script src="books.js"></script>
+        <script>
+            function showBooks() {
+            let bookList = document.getElementById('bookList');
+            books.forEach(book => {
+                let bookClass = 'book';
+                if (book.bestseller) bookClass += ' bestseller';
+                if (!book.inStock) bookClass += ' out-of-stock';
+
+                bookList.innerHTML += `
+                    <div class="${bookClass}">
+                        <h2>${book.name}</h2>
+                        <p>Автор: ${book.author}</p>
+                        <p>Год издания: ${book.year}</p>
+                        <p>Цена: ${book.price} руб.</p>
+                        ${book.bestseller ? '<p>Бестселлер!</p>' : ''}
+                        ${!book.inStock ? '<p>Нет в наличии</p>' : ''}
+                    </div>
+                `;
+            });
+        }
+        </script>
+
+        <footer>
+            <hr>
+            &copy; Дмитрий Чвалинский, ФБИ-34, 2 курс, 2025
+        </footer>
+    </body>
+</html>
